@@ -21,6 +21,8 @@
   "dependencies": {
     "@prisma/client": "^5.5.2",
     "@prisma/extension-accelerate": "^0.6.2",
+    "@types/supertest": "^2.0.16",
+    "@types/validator": "^13.11.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "env-cmd": "^10.1.0",
@@ -28,6 +30,7 @@
     "express-fileupload": "^1.4.2",
     "express-rate-limit": "^7.1.4",
     "prisma": "^5.5.2",
+    "supertest": "^6.3.3",
     "validator": "^13.11.0",
     "winston": "^3.11.0"
   }
