@@ -1,14 +1,20 @@
 import Joi from "joi";
+import TUser from "../app/v1/users/interfaces/types/UserTypes";
 
-const user = Joi.object({
-  name: Joi.string().required().max(20),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-  gender: Joi.string().default("Non-binary"),
-  picture: Joi.string(),
-  age: Joi.number().min(12).default(0),
-  role: Joi.string().allow(null),
-  refreshToken: Joi.string().allow(null),
-});
+const user = ({ required = true }: { required?: boolean }) => {
+  const isRequired = !required ? Joi.string() : Joi.string().required();
+  const userValidation = Joi.object<TUser>({
+    name: isRequired.max(20),
+    email: isRequired.email(),
+    password: isRequired,
+    gender: Joi.string().default("Non-binary"),
+    picture: Joi.string(),
+    age: Joi.number().min(12).default(0),
+    role: Joi.string().allow(null),
+    refreshToken: Joi.string().allow(null),
+  });
+
+  return userValidation;
+};
 
 export default user;
