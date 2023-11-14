@@ -72,8 +72,7 @@ Response Body (Error)
 {
   "TypeError": "...",
   "messege": "...",
-  "status": "KO",
-  "updated": false
+  "status": "KO"
 }
 ```
 
@@ -102,7 +101,6 @@ Response Body (Error)
 {
   "TypeError": "...",
   "messege": "...",
-  "status": "KO",
-  "deleted": false
+  "status": "KO"
 }
 ```
