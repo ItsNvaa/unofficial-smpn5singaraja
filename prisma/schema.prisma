@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  directUrl = env("DIRECT_URL")
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String
+  password String
+  gender String
+  picture String
+  age Int
+  role String?
+  refreshToken String?
+}
+
+model Galery {
+  id String @id @default(uuid())
+  title String
+  desciption String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Teacher {
+  id String @id @default(uuid())
+  fullname String
+  NIP Int
+  gender String
+  grade String
+  class String
+  email String?
+  profile String?
+  picture String
+}
+
+model News {
+  id String @id @default(uuid())
+  title String
+  author String
+  description String
+  picture String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Article {
+  id String @id @default(uuid())
+  title String
+  author String
+  description String
+  picture String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Achivement {
+  id String @id @default(uuid())
+  title String
+  description String
+  picture String
+}
