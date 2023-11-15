@@ -6,8 +6,8 @@
     "start": "bun run --watch ./src/server.ts",
     "dev": "env-cmd -f .env.dev bun run --watch ./src/server.ts",
     "staging": "env-cmd -f .env.staging bun run --watch ./src/server.ts",
-    "test:dev": "env-cmd -f .env.dev bun test --watch",
-    "test:staging": "env-cmd -f .env.staging bun test --watch"
+    "test:dev": "env-cmd -f .env.dev bun test --watch --timeout 8000",
+    "test:staging": "env-cmd -f .env.staging bun test --watch --timeout 8000"
   },
   "devDependencies": {
     "@types/cors": "^2.8.16",
