@@ -60,7 +60,6 @@ class FilesUpload {
       });
     }
   }
-  delete() {}
 }
 
 export default FilesUpload;
