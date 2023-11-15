@@ -11,9 +11,11 @@ app.use(cors());
 app.use(fileUpload());
 app.use(cookieParser());
 app.set("trust proxy", 1);
+app.use(requestErrorValidation);
 
 // Application Routes
 import usersRoutes from "./app/v1/users/routes/users.routes.ts";
+import requestErrorValidation from "./middlewares/requestErrorValidation.ts";
 
 app.use("/v1/users", usersRoutes);
 
