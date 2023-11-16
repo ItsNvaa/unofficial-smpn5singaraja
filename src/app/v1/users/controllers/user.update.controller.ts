@@ -49,7 +49,7 @@ export default async function updateUser(
         "host"
       )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
 
-      new FilesUpload().update<TUser>({
+      new FilesUpload().save<TUser>({
         request: req,
         response: res,
         pathName,
