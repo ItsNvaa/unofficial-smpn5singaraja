@@ -1,4 +1,5 @@
 import { Response } from "express";
+import responsesMessege from "../const/readonly/responsesMessege";
 
 class Responses {
   protected jsonResponse<T>(
@@ -26,8 +27,9 @@ export class SuccessResponses extends Responses {
   sendSuccessSingleData<T>(res: Response, key: string, data: T): Response {
     return this.jsonResponse<T>(res, key, data, 200);
   }
-  success(res: Response, key: string): Response {
-    return res.status(200).json({
+  success(res: Response, key: string, usage?: string): Response {
+    const status = usage == "create" ? 201 : 200;
+    return res.status(status).json({
       [key]: true,
       status: "OK",
     });
@@ -50,8 +52,7 @@ export class ErrorsResponses {
   badRequest(res: Response, messege?: string): Response {
     return this.ErrorResponse(
       res,
-      messege ||
-        "Oops! Your request cannot be processed due to a bad request. Please check your input and try again.",
+      messege || responsesMessege.badRequest,
       400,
       "Bad Request"
     );
@@ -59,7 +60,7 @@ export class ErrorsResponses {
   notFound(res: Response, messege?: string): Response {
     return this.ErrorResponse(
       res,
-      messege || "Oops! The data you are looking for could not be found.",
+      messege || responsesMessege.notFound,
       404,
       "Not Found"
     );
@@ -67,8 +68,7 @@ export class ErrorsResponses {
   unprocessable(res: Response, messege?: string): Response {
     return this.ErrorResponse(
       res,
-      messege ||
-        "The content you provided could not be processed due to errors in the data. Please review your input and make sure it meets the required format and criteria.",
+      messege || responsesMessege.unprocessable,
       422,
       "Unprocessable Content"
     );
@@ -76,8 +76,7 @@ export class ErrorsResponses {
   unauth(res: Response, messege?: string): Response {
     return this.ErrorResponse(
       res,
-      messege ||
-        "You are not authorized to access this resource. Please provide valid credentials or authentication.",
+      messege || responsesMessege.unauth,
       401,
       "Unauthorized"
     );

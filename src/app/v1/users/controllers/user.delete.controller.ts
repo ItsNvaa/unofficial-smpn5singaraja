@@ -6,6 +6,7 @@ import deleteUserViaClient from "../services/deleteUserViaClient";
 import validator from "validator";
 import client from "../../../../libs/configs/prisma";
 import TUser from "../interfaces/types/UserTypes";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function deleteUser(
   req: Request,
@@ -16,7 +17,7 @@ export default async function deleteUser(
     if (!validator.isUUID(id))
       return new ErrorsResponses().badRequest(
         res,
-        "The User ID was not valid."
+        responsesMessege.wrongRequestID
       );
 
     const findUser: Awaited<TUser> | null = await client.user.findUnique({
@@ -26,7 +27,7 @@ export default async function deleteUser(
     if (!findUser || findUser == null)
       return new ErrorsResponses().badRequest(
         res,
-        "Failed to delete user, please try again later."
+        responsesMessege.cannotDelete
       );
 
     if (findUser) {
@@ -42,15 +43,17 @@ export default async function deleteUser(
 
         new FilesSystem().deleteFile(path);
 
-        return new SuccessResponses().success(res, "delete");
+        return new SuccessResponses().success(res, "deleted");
       }
 
       await deleteUserViaClient(id);
 
-      return new SuccessResponses().success(res, "delete");
+      return new SuccessResponses().success(res, "deleted");
     }
   } catch (err) {
     logger.error(err);
     return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
   }
 }

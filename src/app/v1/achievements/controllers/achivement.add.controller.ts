@@ -1,65 +1,59 @@
+import achivement from "../../../../validations/achivementValidation";
 import { Response, Request } from "express";
-import client from "../../../../libs/configs/prisma";
-import validator from "validator";
-import logger from "../../../../libs/logger";
-import user from "../../../../validations/userValidation";
-import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
-import path from "path";
-import TUser from "../interfaces/types/UserTypes";
+import client from "../../../../libs/configs/prisma";
+import { UploadedFile } from "express-fileupload";
+import logger from "../../../../libs/logger";
+import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
+import path from "path";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
 
-export default async function updateUser(
+export default async function addAchivement(
   req: Request,
   res: Response
-): Promise<Response | void> {
+): Promise<void | Response<any, Record<string, any>>> {
   try {
-    const { id } = req.params;
-    if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
         res,
         responsesMessege.emptyFields
       );
 
-    const userValidation = user({ required: false });
-    const { value, error } = userValidation.validate(req.body);
+    const achivementValidation = achivement({ required: true });
+    const { value, error } = achivementValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
     if (!req.files) {
-      await client.user.update({
-        where: { id },
-        data: {
-          ...value,
-        },
+      await client.achivement.create({
+        data: { ...value },
       });
 
-      if (!error) return new SuccessResponses().success(res, "updated");
+      return new SuccessResponses().success(res, "created", "create");
     }
 
     if (req.files) {
       filesUploadFieldsValidation(req, res, "picture");
-      const pathName = "./public/img/users/pictures";
+
+      const pathName = "./public/img/achivements/pictures";
       // @ts-ignore
       const picture: UploadedFile = req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
-      )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
+      )}/img/achivements/pictures/${picture.md5 + path.extname(picture.name)}`;
 
-      new FilesUpload().save<TUser>({
+      new FilesUpload().save({
         request: req,
         response: res,
-        pathName,
         file: picture,
+        pathName,
       });
 
-      await client.user.update({
-        where: { id },
+      await client.achivement.create({
         data: { ...value, picture: urlPath },
       });
 
-      return new SuccessResponses().success(res, "updated");
+      return new SuccessResponses().success(res, "created", "create");
     }
   } catch (err) {
     logger.error(err);

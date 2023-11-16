@@ -4,6 +4,7 @@ import type TUser from "../interfaces/types/UserTypes";
 import client from "../../../../libs/configs/prisma";
 import validator from "validator";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export async function singleUser(
   req: Request,
@@ -14,7 +15,7 @@ export async function singleUser(
     if (!validator.isUUID(id))
       return new ErrorsResponses().badRequest(
         res,
-        "The User ID was not valid."
+        responsesMessege.wrongRequestID
       );
     const user: TUser | null = await client.user.findUnique({
       where: {
@@ -29,6 +30,6 @@ export async function singleUser(
     logger.error(err);
     return new ErrorsResponses().badRequest(res);
   } finally {
-    client.$disconnect();
+    await client.$disconnect();
   }
 }
