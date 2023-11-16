@@ -26,8 +26,9 @@ export class SuccessResponses extends Responses {
   sendSuccessSingleData<T>(res: Response, key: string, data: T): Response {
     return this.jsonResponse<T>(res, key, data, 200);
   }
-  success(res: Response, key: string): Response {
-    return res.status(200).json({
+  success(res: Response, key: string, usage?: string): Response {
+    const status = usage == "create" ? 201 : 200;
+    return res.status(status).json({
       [key]: true,
       status: "OK",
     });
