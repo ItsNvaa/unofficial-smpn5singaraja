@@ -12,8 +12,8 @@ export default function handleValidation<T>({
   schema: Function;
   required?: boolean;
 }): T | Response {
-  const userValidation = schema({ required });
-  const { value, error } = userValidation.validate(req.body);
+  const validation = schema({ required });
+  const { value, error } = validation.validate(req.body);
   if (error) return new ErrorsResponses().badRequest(res, error.message);
 
   return value;
