@@ -16,7 +16,9 @@ app.use(requestErrorValidation);
 // Application Routes
 import usersRoutes from "./app/v1/users/routes/users.routes.ts";
 import requestErrorValidation from "./middlewares/requestErrorValidation.ts";
+import achivementRoutes from "./app/v1/achievements/routes/achivement.routes.ts";
 
 app.use("/v1/users", usersRoutes);
+app.use("/v1/achivements", achivementRoutes);
 
 export default app;
