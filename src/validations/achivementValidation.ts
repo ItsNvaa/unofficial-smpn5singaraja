@@ -5,7 +5,7 @@ export default function achivement({ required = true }: { required: boolean }) {
   const achivementValidation = Joi.object({
     title: isRequired,
     description: isRequired,
-    picture: isRequired,
+    picture: Joi.string(),
   });
 
   return achivementValidation;
