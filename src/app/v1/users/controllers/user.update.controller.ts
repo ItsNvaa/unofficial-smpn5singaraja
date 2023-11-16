@@ -34,7 +34,7 @@ export default async function updateUser(
         },
       });
 
-      if (!error) return new SuccessResponses().success(res, "update");
+      if (!error) return new SuccessResponses().success(res, "updated");
     }
 
     if (req.files) {
@@ -58,7 +58,7 @@ export default async function updateUser(
         data: { ...value, picture: urlPath },
       });
 
-      return new SuccessResponses().success(res, "update");
+      return new SuccessResponses().success(res, "updated");
     }
   } catch (err) {
     logger.error(err);

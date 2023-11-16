@@ -42,12 +42,12 @@ export default async function deleteUser(
 
         new FilesSystem().deleteFile(path);
 
-        return new SuccessResponses().success(res, "delete");
+        return new SuccessResponses().success(res, "deleted");
       }
 
       await deleteUserViaClient(id);
 
-      return new SuccessResponses().success(res, "delete");
+      return new SuccessResponses().success(res, "deleted");
     }
   } catch (err) {
     logger.error(err);
