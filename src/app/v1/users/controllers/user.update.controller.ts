@@ -53,10 +53,15 @@ export default async function updateUser(
         request: req,
         response: res,
         pathName,
-        body: value,
-        id,
-        urlPath,
+        file: picture,
       });
+
+      await client.user.update({
+        where: { id },
+        data: { ...value, picture: urlPath },
+      });
+
+      return new SuccessResponses().success(res, "update");
     }
   } catch (err) {
     logger.error(err);
