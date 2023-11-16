@@ -7,6 +7,7 @@ import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import TUser from "../interfaces/types/UserTypes";
+import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 
 export default async function updateUser(
   req: Request,
@@ -37,11 +38,7 @@ export default async function updateUser(
     }
 
     if (req.files) {
-      if (!validator.contains("picture", Object.keys(req.files)))
-        return new ErrorsResponses().unprocessable(
-          res,
-          `The ${Object.keys(req.files)[0]} was not allowed`
-        );
+      filesUploadFieldsValidation(req, res, "picture");
       const pathName = "./public/img/users/pictures";
       // @ts-ignore
       const picture: UploadedFile = req.files.picture;
