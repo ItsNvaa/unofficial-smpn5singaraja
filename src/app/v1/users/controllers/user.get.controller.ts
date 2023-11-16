@@ -29,6 +29,6 @@ export async function singleUser(
     logger.error(err);
     return new ErrorsResponses().badRequest(res);
   } finally {
-    client.$disconnect();
+    await client.$disconnect();
   }
 }

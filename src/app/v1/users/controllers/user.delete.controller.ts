@@ -52,5 +52,7 @@ export default async function deleteUser(
   } catch (err) {
     logger.error(err);
     return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
   }
 }
