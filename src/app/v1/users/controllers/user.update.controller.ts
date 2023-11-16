@@ -6,6 +6,7 @@ import user from "../../../../validations/userValidation";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
+import TUser from "../interfaces/types/UserTypes";
 
 export default async function updateUser(
   req: Request,
@@ -48,7 +49,7 @@ export default async function updateUser(
         "host"
       )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
 
-      new FilesUpload().update({
+      new FilesUpload().update<TUser>({
         request: req,
         response: res,
         pathName,
