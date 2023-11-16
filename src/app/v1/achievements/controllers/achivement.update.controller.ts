@@ -7,6 +7,7 @@ import achivement from "../../../../validations/achivementValidation";
 import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import validator from "validator";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function updateAchivement(
   req: Request,
@@ -19,7 +20,7 @@ export default async function updateAchivement(
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
         res,
-        "The input fields must be filled."
+        responsesMessege.emptyFields
       );
 
     const achivementValidation = achivement({ required: false });

@@ -7,6 +7,7 @@ import logger from "../../../../libs/logger";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 import path from "path";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function addAchivement(
   req: Request,
@@ -16,7 +17,7 @@ export default async function addAchivement(
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
         res,
-        "The input fields must be filled."
+        responsesMessege.emptyFields
       );
 
     const achivementValidation = achivement({ required: true });

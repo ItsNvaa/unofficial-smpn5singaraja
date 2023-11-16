@@ -4,6 +4,7 @@ import client from "../../../../libs/configs/prisma";
 import logger from "../../../../libs/logger";
 import { SuccessResponses, ErrorsResponses } from "../../../../utils/res";
 import TAchivement from "../interfaces/types/AchivementTypes";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export async function achivements(
   req: Request,
@@ -41,7 +42,10 @@ export async function singleAchivement(
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))
-      return new ErrorsResponses().badRequest(res, "Invalid Achivements ID!");
+      return new ErrorsResponses().badRequest(
+        res,
+        responsesMessege.wrongRequestID
+      );
 
     const achivement: Awaited<TAchivement> | null =
       await client.achivement.findUnique({

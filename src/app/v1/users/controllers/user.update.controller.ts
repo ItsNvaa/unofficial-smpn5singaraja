@@ -8,6 +8,7 @@ import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import TUser from "../interfaces/types/UserTypes";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function updateUser(
   req: Request,
@@ -19,7 +20,7 @@ export default async function updateUser(
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
         res,
-        "The input fields must be filled."
+        responsesMessege.emptyFields
       );
 
     const userValidation = user({ required: false });
