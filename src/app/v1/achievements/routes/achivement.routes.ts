@@ -1,7 +1,11 @@
 import express from "express";
 const router = express.Router();
-import { achivements } from "../controllers/achivement.get.controller";
+import {
+  achivements,
+  singleAchivement,
+} from "../controllers/achivement.get.controller";
 
 router.get("/", achivements);
+router.get("/:id", singleAchivement);
 
 export default router;
