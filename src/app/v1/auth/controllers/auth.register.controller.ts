@@ -27,7 +27,7 @@ export default async function register(
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
     validateUsernameAndEmail(res, value);
-    const password: string = new Argon2().hash(value.password);
+    const password: string | null = new Argon2().hash(value.password)!;
 
     if (!req.files) {
       registerUser(res, value, password, value.picture);
