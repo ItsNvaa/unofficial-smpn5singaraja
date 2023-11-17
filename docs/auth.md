@@ -23,8 +23,7 @@ Response Body (Success)
 ```json
 {
   "created": true,
-  "status": "OK",
-  "refreshToken": "..."
+  "status": "OK"
 }
 ```
 
