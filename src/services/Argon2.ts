@@ -1,3 +1,4 @@
+import TUser from "../app/v1/users/interfaces/types/UserTypes";
 import logger from "../libs/logger";
 
 class Argon2 {
@@ -9,6 +10,16 @@ class Argon2 {
     } catch (err) {
       logger.error(err);
       throw new Error("Hashing failed.");
+    }
+  }
+  verify(input: TUser, password: string): boolean {
+    try {
+      const verifyPassword = Bun.password.verifySync(input.password, password);
+
+      return verifyPassword;
+    } catch (err) {
+      logger.error(err);
+      throw new Error("Password does not match!");
     }
   }
 }
