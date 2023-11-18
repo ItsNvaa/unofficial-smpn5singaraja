@@ -9,6 +9,7 @@ import path from "path";
 import TUser from "../interfaces/types/UserTypes";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
+import Argon2 from "../../../../services/Argon2";
 
 export default async function updateUser(
   req: Request,
@@ -27,11 +28,16 @@ export default async function updateUser(
     const { value, error } = userValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
+    let password: string | null;
+    password = new Argon2().hash(value.password);
+    if (!password || !value.password) password = value.password;
+
     if (!req.files) {
       await client.user.update({
         where: { id },
         data: {
           ...value,
+          password,
         },
       });
 
@@ -56,7 +62,7 @@ export default async function updateUser(
 
       await client.user.update({
         where: { id },
-        data: { ...value, picture: urlPath },
+        data: { ...value, picture: urlPath, password },
       });
 
       return new SuccessResponses().success(res, "updated");
