@@ -48,7 +48,7 @@ export async function loginWithGoogle(
 
     // @ts-ignore
     const { accessToken, refreshToken } = new JsonWebToken().sign({
-      payload: { name: value.name, id: value.id, email: value.id },
+      payload: { name: data.name!, email: data.id! },
     });
 
     const isSecured = process.env.NODE_ENV == "production" ? true : false;
@@ -59,7 +59,7 @@ export async function loginWithGoogle(
     });
 
     return res.redirect(
-      `${CLIENT_FRONTEND_URL}/auth/login?token=${accessToken}`
+      `${CLIENT_FRONTEND_URL}/auth/login/google?token=${accessToken}`
     );
   } catch (err) {
     logger.error(err);
