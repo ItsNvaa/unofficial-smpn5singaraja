@@ -30,7 +30,7 @@ export async function loginWithGoogle(
     if (!data) return res.redirect(`${CLIENT_FRONTEND_URL}/auth/register`);
 
     const users = await client.user.findMany({
-      where: { email: value.email, name: value.name },
+      where: { email: data.email!, name: data.name! },
     });
 
     if (!users[0]) {
