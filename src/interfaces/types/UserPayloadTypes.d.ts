@@ -1,3 +1,3 @@
-type TUserPayload = { id: string; name: string; email: string };
+type TUserPayload = { name: string; email: string };
 
 export default TUserPayload;
