@@ -2228,6 +2228,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     desciption: string | null
+    picture: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2236,6 +2237,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     desciption: string | null
+    picture: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2244,6 +2246,7 @@ export namespace Prisma {
     id: number
     title: number
     desciption: number
+    picture: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2254,6 +2257,7 @@ export namespace Prisma {
     id?: true
     title?: true
     desciption?: true
+    picture?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2262,6 +2266,7 @@ export namespace Prisma {
     id?: true
     title?: true
     desciption?: true
+    picture?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2270,6 +2275,7 @@ export namespace Prisma {
     id?: true
     title?: true
     desciption?: true
+    picture?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2351,6 +2357,7 @@ export namespace Prisma {
     id: string
     title: string
     desciption: string
+    picture: string
     createdAt: Date
     updatedAt: Date
     _count: GaleryCountAggregateOutputType | null
@@ -2376,6 +2383,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     desciption?: boolean
+    picture?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["galery"]>
@@ -2384,6 +2392,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     desciption?: boolean
+    picture?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -2396,6 +2405,7 @@ export namespace Prisma {
       id: string
       title: string
       desciption: string
+      picture: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["galery"]>
@@ -2795,6 +2805,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Galery", 'String'>
     readonly title: FieldRef<"Galery", 'String'>
     readonly desciption: FieldRef<"Galery", 'String'>
+    readonly picture: FieldRef<"Galery", 'String'>
     readonly createdAt: FieldRef<"Galery", 'DateTime'>
     readonly updatedAt: FieldRef<"Galery", 'DateTime'>
   }
@@ -6708,6 +6719,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     desciption: 'desciption',
+    picture: 'picture',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6935,6 +6947,7 @@ export namespace Prisma {
     id?: StringFilter<"Galery"> | string
     title?: StringFilter<"Galery"> | string
     desciption?: StringFilter<"Galery"> | string
+    picture?: StringFilter<"Galery"> | string
     createdAt?: DateTimeFilter<"Galery"> | Date | string
     updatedAt?: DateTimeFilter<"Galery"> | Date | string
   }
@@ -6943,6 +6956,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     desciption?: SortOrder
+    picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6954,6 +6968,7 @@ export namespace Prisma {
     NOT?: GaleryWhereInput | GaleryWhereInput[]
     title?: StringFilter<"Galery"> | string
     desciption?: StringFilter<"Galery"> | string
+    picture?: StringFilter<"Galery"> | string
     createdAt?: DateTimeFilter<"Galery"> | Date | string
     updatedAt?: DateTimeFilter<"Galery"> | Date | string
   }, "id">
@@ -6962,6 +6977,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     desciption?: SortOrder
+    picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: GaleryCountOrderByAggregateInput
@@ -6976,6 +6992,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Galery"> | string
     title?: StringWithAggregatesFilter<"Galery"> | string
     desciption?: StringWithAggregatesFilter<"Galery"> | string
+    picture?: StringWithAggregatesFilter<"Galery"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Galery"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Galery"> | Date | string
   }
@@ -7313,6 +7330,7 @@ export namespace Prisma {
     id?: string
     title: string
     desciption: string
+    picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7321,6 +7339,7 @@ export namespace Prisma {
     id?: string
     title: string
     desciption: string
+    picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7329,6 +7348,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     desciption?: StringFieldUpdateOperationsInput | string
+    picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7337,6 +7357,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     desciption?: StringFieldUpdateOperationsInput | string
+    picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7345,6 +7366,7 @@ export namespace Prisma {
     id?: string
     title: string
     desciption: string
+    picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7353,6 +7375,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     desciption?: StringFieldUpdateOperationsInput | string
+    picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7361,6 +7384,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     desciption?: StringFieldUpdateOperationsInput | string
+    picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7795,6 +7819,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     desciption?: SortOrder
+    picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7803,6 +7828,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     desciption?: SortOrder
+    picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7811,6 +7837,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     desciption?: SortOrder
+    picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

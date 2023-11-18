@@ -28,6 +28,7 @@ model Galery {
   id String @id @default(uuid())
   title String
   desciption String
+  picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

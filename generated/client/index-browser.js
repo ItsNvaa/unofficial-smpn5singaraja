@@ -123,6 +123,7 @@ exports.Prisma.GaleryScalarFieldEnum = {
   id: 'id',
   title: 'title',
   desciption: 'desciption',
+  picture: 'picture',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
