@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import client from "../../../../libs/configs/prisma";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses } from "../../../../utils/res";
-import {
-  CLIENT_FRONTEND_URL,
-  CLIENT_URL,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET,
-} from "../../../../const/config";
+import { CLIENT_FRONTEND_URL } from "../../../../const/config";
 import user from "../../../../validations/userValidation";
+import {
+  githubUrl,
+  userGithubUrl,
+  rediretGithubAuthUrl,
+} from "../const/readonly/githubAuthUrl";
 import type TGithubAccessToken from "../interfaces/types/GithubAccessTokenTypes";
 import JsonWebToken from "../../../../services/JsonWebToken";
 
@@ -22,8 +22,8 @@ export async function loginWithGithub(
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
     const { code } = req.query;
-    const githubUrl: string = `https://github.com/login/oauth/access_token?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&code=${code}&scope=user%20user:email%20user:follow`;
-    const response = await fetch(githubUrl, {
+
+    const response = await fetch(`${githubUrl}&code=${code}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -33,7 +33,7 @@ export async function loginWithGithub(
 
     const { access_token, token_type } = result;
 
-    const userResponse = await fetch("https://api.github.com/user", {
+    const userResponse = await fetch(userGithubUrl, {
       headers: { Authorization: `${token_type} ${access_token}` },
     });
     const userData = await userResponse.json();
@@ -88,7 +88,5 @@ export function redirectGithubAuth(
   req: Request,
   res: Response
 ): Response | void {
-  return res.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${CLIENT_URL}/v1/auth/github/callback`
-  );
+  return res.redirect(rediretGithubAuthUrl);
 }
