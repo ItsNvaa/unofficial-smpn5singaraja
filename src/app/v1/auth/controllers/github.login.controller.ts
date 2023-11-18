@@ -11,6 +11,8 @@ import {
 } from "../const/readonly/githubAuthUrl";
 import type TGithubAccessToken from "../interfaces/types/GithubAccessTokenTypes";
 import JsonWebToken from "../../../../services/JsonWebToken";
+import useFetch from "../../../../utils/useFetch";
+import type TGithubUser from "../interfaces/types/GithubUserTypes";
 
 export async function loginWithGithub(
   req: Request,
@@ -23,20 +25,25 @@ export async function loginWithGithub(
 
     const { code } = req.query;
 
-    const response = await fetch(`${githubUrl}&code=${code}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    const result: Awaited<TGithubAccessToken> = await response.json();
+    const result: Awaited<TGithubAccessToken | null> =
+      await useFetch<TGithubAccessToken>(`${githubUrl}&code=${code}`, "POST");
 
+    if (!result)
+      return new ErrorsResponses().badRequest(res, "Something wrong happen!");
     const { access_token, token_type } = result;
 
-    const userResponse = await fetch(userGithubUrl, {
-      headers: { Authorization: `${token_type} ${access_token}` },
-    });
-    const userData = await userResponse.json();
+    const token: string = `${token_type} ${access_token}`;
+    const userData: Awaited<null | TGithubUser> = await useFetch<TGithubUser>(
+      userGithubUrl,
+      "GET",
+      token
+    );
+
+    if (!userData)
+      return new ErrorsResponses().unprocessable(
+        res,
+        "Cannot proccess your login request"
+      );
 
     const users = await client.user.findMany({
       where: {
