@@ -3,7 +3,7 @@
   "module": "server.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run --watch ./src/server.ts",
+    "start": "bun run ./src/server.ts",
     "dev": "env-cmd -f .env.dev bun run --watch ./src/server.ts",
     "staging": "env-cmd -f .env.staging bun run --watch ./src/server.ts",
     "test:dev": "env-cmd -f .env.dev bun test --watch --timeout 8000",
