@@ -18,9 +18,11 @@ import usersRoutes from "./app/v1/users/routes/users.routes.ts";
 import requestErrorValidation from "./middlewares/requestErrorValidation.ts";
 import achivementRoutes from "./app/v1/achievements/routes/achivement.routes.ts";
 import authRoutes from "./app/v1/auth/routes/auth.routes.ts";
+import googleAuthRoutes from "./app/v1/auth/routes/google.auth.routes.ts";
 
 app.use("/v1/users", usersRoutes);
 app.use("/v1/achivements", achivementRoutes);
 app.use("/v1/auth", authRoutes);
+app.use("/v1/auth/google", googleAuthRoutes);
 
 export default app;
