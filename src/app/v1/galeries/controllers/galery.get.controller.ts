@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import TGalery from "../interfaces/types/GaleryTypes";
+import validator from "validator";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export async function galeries(
   req: Request,
@@ -24,6 +26,33 @@ export async function galeries(
       "galeries",
       galeries
     );
+  } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
+  }
+}
+
+export async function singleGalery(
+  req: Request,
+  res: Response
+): Promise<void | Response<Record<any, string>>> {
+  try {
+    const { id } = req.params;
+    if (!validator.isUUID(id))
+      return new ErrorsResponses().badRequest(
+        res,
+        responsesMessege.wrongRequestID
+      );
+
+    const galery: Awaited<TGalery> | null = await client.galery.findUnique({
+      where: { id },
+    });
+
+    if (!galery) return new ErrorsResponses().notFound(res);
+
+    return new SuccessResponses().sendSuccessSingleData(res, "galery", galery);
   } catch (err) {
     logger.error(err);
     return new ErrorsResponses().badRequest(res);

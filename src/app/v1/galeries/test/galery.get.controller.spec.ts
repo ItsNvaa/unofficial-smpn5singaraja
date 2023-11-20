@@ -39,4 +39,38 @@ describe("Test GET Galeries API Endpoint", () => {
       expect(request.status).toBe(200);
     });
   });
+  describe("Test GET Single Galery API Endpoint", () => {
+    test("should be return 200 status code", async () => {
+      const galery = await client.galery.findFirst();
+      const request = await supertest(app).get(`/v1/galeries/${galery?.id}`);
+
+      expect(request.body.status).toBe("OK");
+      expect(request.status).toBe(200);
+    });
+    test("Make sure it can accept aplication/json", async () => {
+      const galery = await client.galery.findFirst();
+      const request = await supertest(app)
+        .get(`/v1/galeries/${galery?.id}`)
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.status).toBe(200);
+    });
+    test("should be return 400 status code if the galery ID is not UUID", async () => {
+      const request = await supertest(app)
+        .get(`/v1/galeries/123`)
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("KO");
+      expect(request.status).toBe(400);
+    });
+    test("should be return 404 status code if the galery data is not found", async () => {
+      const request = await supertest(app)
+        .get(`/v1/galeries/857a5e3a-6799-41c3-8e89-19c9fe050a1d`)
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("KO");
+      expect(request.status).toBe(404);
+    });
+  });
 });
