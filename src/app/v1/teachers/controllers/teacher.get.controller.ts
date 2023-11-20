@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import client from "../../../../libs/configs/prisma";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
+import TeacherType from "../interfaces/types/TeacherTypes";
 
 export async function teachers(
   req: Request,
@@ -23,6 +25,38 @@ export async function teachers(
       res,
       "teachers",
       teachers
+    );
+  } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
+  }
+}
+
+export async function singeTeacher(
+  req: Request,
+  res: Response
+): Promise<void | Response<Record<any, string>>> {
+  try {
+    const { id } = req.params;
+    if (!validator.isUUID(id))
+      return new ErrorsResponses().badRequest(
+        res,
+        responsesMessege.wrongRequestID
+      );
+
+    const teacher: Awaited<TeacherType> | null =
+      await client.teacher.findUnique({
+        where: { id },
+      });
+
+    if (!teacher) return new ErrorsResponses().notFound(res);
+
+    return new SuccessResponses().sendSuccessSingleData(
+      res,
+      "teacher",
+      teacher
     );
   } catch (err) {
     logger.error(err);
