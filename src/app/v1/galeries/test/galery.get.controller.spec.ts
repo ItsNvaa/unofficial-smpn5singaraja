@@ -1,0 +1,42 @@
+import { expect, describe, test } from "bun:test";
+import app from "../../../../main";
+import supertest from "supertest";
+import client from "../../../../libs/configs/prisma";
+
+describe("Test GET Galeries API Endpoint", () => {
+  describe("Test GET All Galeries API Endpoint", () => {
+    test("should be return 200 status code", async () => {
+      const request = await supertest(app).get("/v1/galeries");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.status).toBe(200);
+    });
+    test("Make sure it can accept aplication/json", async () => {
+      const request = await supertest(app)
+        .get("/v1/galeries")
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.status).toBe(200);
+    });
+    test("should be return 200 status code", async () => {
+      const total = await client.galery.count();
+      const request = await supertest(app)
+        .get("/v1/galeries?skip=1")
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.body.galeries.length).toBe(total - 1);
+      expect(request.status).toBe(200);
+    });
+    test("should be return 200 status code", async () => {
+      const request = await supertest(app)
+        .get("/v1/galeries?limit=1")
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.body.galeries.length).toBe(1);
+      expect(request.status).toBe(200);
+    });
+  });
+});
