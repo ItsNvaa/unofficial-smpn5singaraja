@@ -122,7 +122,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.GaleryScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  desciption: 'desciption',
+  description: 'description',
   picture: 'picture',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

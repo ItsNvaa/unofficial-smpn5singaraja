@@ -2227,7 +2227,7 @@ export namespace Prisma {
   export type GaleryMinAggregateOutputType = {
     id: string | null
     title: string | null
-    desciption: string | null
+    description: string | null
     picture: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2236,7 +2236,7 @@ export namespace Prisma {
   export type GaleryMaxAggregateOutputType = {
     id: string | null
     title: string | null
-    desciption: string | null
+    description: string | null
     picture: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2245,7 +2245,7 @@ export namespace Prisma {
   export type GaleryCountAggregateOutputType = {
     id: number
     title: number
-    desciption: number
+    description: number
     picture: number
     createdAt: number
     updatedAt: number
@@ -2256,7 +2256,7 @@ export namespace Prisma {
   export type GaleryMinAggregateInputType = {
     id?: true
     title?: true
-    desciption?: true
+    description?: true
     picture?: true
     createdAt?: true
     updatedAt?: true
@@ -2265,7 +2265,7 @@ export namespace Prisma {
   export type GaleryMaxAggregateInputType = {
     id?: true
     title?: true
-    desciption?: true
+    description?: true
     picture?: true
     createdAt?: true
     updatedAt?: true
@@ -2274,7 +2274,7 @@ export namespace Prisma {
   export type GaleryCountAggregateInputType = {
     id?: true
     title?: true
-    desciption?: true
+    description?: true
     picture?: true
     createdAt?: true
     updatedAt?: true
@@ -2356,7 +2356,7 @@ export namespace Prisma {
   export type GaleryGroupByOutputType = {
     id: string
     title: string
-    desciption: string
+    description: string
     picture: string
     createdAt: Date
     updatedAt: Date
@@ -2382,7 +2382,7 @@ export namespace Prisma {
   export type GalerySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    desciption?: boolean
+    description?: boolean
     picture?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2391,7 +2391,7 @@ export namespace Prisma {
   export type GalerySelectScalar = {
     id?: boolean
     title?: boolean
-    desciption?: boolean
+    description?: boolean
     picture?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2404,7 +2404,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
-      desciption: string
+      description: string
       picture: string
       createdAt: Date
       updatedAt: Date
@@ -2804,7 +2804,7 @@ export namespace Prisma {
   interface GaleryFieldRefs {
     readonly id: FieldRef<"Galery", 'String'>
     readonly title: FieldRef<"Galery", 'String'>
-    readonly desciption: FieldRef<"Galery", 'String'>
+    readonly description: FieldRef<"Galery", 'String'>
     readonly picture: FieldRef<"Galery", 'String'>
     readonly createdAt: FieldRef<"Galery", 'DateTime'>
     readonly updatedAt: FieldRef<"Galery", 'DateTime'>
@@ -6718,7 +6718,7 @@ export namespace Prisma {
   export const GaleryScalarFieldEnum: {
     id: 'id',
     title: 'title',
-    desciption: 'desciption',
+    description: 'description',
     picture: 'picture',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -6946,7 +6946,7 @@ export namespace Prisma {
     NOT?: GaleryWhereInput | GaleryWhereInput[]
     id?: StringFilter<"Galery"> | string
     title?: StringFilter<"Galery"> | string
-    desciption?: StringFilter<"Galery"> | string
+    description?: StringFilter<"Galery"> | string
     picture?: StringFilter<"Galery"> | string
     createdAt?: DateTimeFilter<"Galery"> | Date | string
     updatedAt?: DateTimeFilter<"Galery"> | Date | string
@@ -6955,7 +6955,7 @@ export namespace Prisma {
   export type GaleryOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    desciption?: SortOrder
+    description?: SortOrder
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6967,7 +6967,7 @@ export namespace Prisma {
     OR?: GaleryWhereInput[]
     NOT?: GaleryWhereInput | GaleryWhereInput[]
     title?: StringFilter<"Galery"> | string
-    desciption?: StringFilter<"Galery"> | string
+    description?: StringFilter<"Galery"> | string
     picture?: StringFilter<"Galery"> | string
     createdAt?: DateTimeFilter<"Galery"> | Date | string
     updatedAt?: DateTimeFilter<"Galery"> | Date | string
@@ -6976,7 +6976,7 @@ export namespace Prisma {
   export type GaleryOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    desciption?: SortOrder
+    description?: SortOrder
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6991,7 +6991,7 @@ export namespace Prisma {
     NOT?: GaleryScalarWhereWithAggregatesInput | GaleryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Galery"> | string
     title?: StringWithAggregatesFilter<"Galery"> | string
-    desciption?: StringWithAggregatesFilter<"Galery"> | string
+    description?: StringWithAggregatesFilter<"Galery"> | string
     picture?: StringWithAggregatesFilter<"Galery"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Galery"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Galery"> | Date | string
@@ -7329,7 +7329,7 @@ export namespace Prisma {
   export type GaleryCreateInput = {
     id?: string
     title: string
-    desciption: string
+    description: string
     picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7338,7 +7338,7 @@ export namespace Prisma {
   export type GaleryUncheckedCreateInput = {
     id?: string
     title: string
-    desciption: string
+    description: string
     picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7347,7 +7347,7 @@ export namespace Prisma {
   export type GaleryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    desciption?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7356,7 +7356,7 @@ export namespace Prisma {
   export type GaleryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    desciption?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7365,7 +7365,7 @@ export namespace Prisma {
   export type GaleryCreateManyInput = {
     id?: string
     title: string
-    desciption: string
+    description: string
     picture: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7374,7 +7374,7 @@ export namespace Prisma {
   export type GaleryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    desciption?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7383,7 +7383,7 @@ export namespace Prisma {
   export type GaleryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    desciption?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     picture?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7818,7 +7818,7 @@ export namespace Prisma {
   export type GaleryCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    desciption?: SortOrder
+    description?: SortOrder
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7827,7 +7827,7 @@ export namespace Prisma {
   export type GaleryMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    desciption?: SortOrder
+    description?: SortOrder
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7836,7 +7836,7 @@ export namespace Prisma {
   export type GaleryMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    desciption?: SortOrder
+    description?: SortOrder
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
