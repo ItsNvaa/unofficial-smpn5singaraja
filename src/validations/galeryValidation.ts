@@ -5,7 +5,7 @@ export default function galery({ required }: { required: boolean }) {
   const galeryValidation = Joi.object({
     title: isRequired,
     description: isRequired,
-    picture: isRequired,
+    picture: Joi.string(),
   });
 
   return galeryValidation;
