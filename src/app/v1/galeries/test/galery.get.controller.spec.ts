@@ -73,4 +73,22 @@ describe("Test GET Galeries API Endpoint", () => {
       expect(request.status).toBe(404);
     });
   });
+  describe("Test Search Galeries API Endpoint", () => {
+    test("should be return 200 status code", async () => {
+      const request = await supertest(app).get("/v1/galeries/search?q=foto");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.body.galeries).toBeDefined();
+      expect(request.status).toBe(200);
+    });
+    test("Make sure it can accept aplication/json", async () => {
+      const request = await supertest(app)
+        .get("/v1/galeries/search?q=foto")
+        .set("Content-Type", "application/json");
+
+      expect(request.body.status).toBe("OK");
+      expect(request.body.galeries).toBeDefined();
+      expect(request.status).toBe(200);
+    });
+  });
 });

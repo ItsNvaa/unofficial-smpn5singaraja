@@ -60,3 +60,27 @@ export async function singleGalery(
     await client.$disconnect();
   }
 }
+
+export async function searchGaleries(
+  req: Request,
+  res: Response
+): Promise<void | Response<Record<any, string>>> {
+  try {
+    const { q } = req.query;
+
+    const galeries: Awaited<TGalery[]> = await client.galery.findMany({
+      where: { title: { contains: String(q) } },
+    });
+
+    return new SuccessResponses().sendSuccessWithMultipleData(
+      res,
+      "galeries",
+      galeries
+    );
+  } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
+  }
+}
