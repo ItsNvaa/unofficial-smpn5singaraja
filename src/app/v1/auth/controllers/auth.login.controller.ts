@@ -3,11 +3,11 @@ import { Response, Request } from "express";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses } from "../../../../utils/res";
 import client from "../../../../libs/configs/prisma";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
 import user from "../../../../validations/userValidation";
 import Argon2 from "../../../../services/Argon2";
 import TUser from "../../users/interfaces/types/UserTypes";
 import JsonWebToken from "../../../../services/JsonWebToken";
+import validateEmptyField from "../../../../utils/validateEmptyField";
 // import { CLIENT_URL } from "../../../../const/config";
 
 export default async function login(
@@ -15,11 +15,7 @@ export default async function login(
   res: Response
 ): Promise<void | Response<Record<any, string>>> {
   try {
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
+    validateEmptyField(req, res);
 
     const authValidation = user({ required: true });
     const { value, error } = authValidation.validate(req.body);

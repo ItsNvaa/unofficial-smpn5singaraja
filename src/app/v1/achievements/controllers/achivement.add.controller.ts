@@ -1,3 +1,4 @@
+import path from "path";
 import achivement from "../../../../validations/achivementValidation";
 import { Response, Request } from "express";
 import FilesUpload from "../../../../services/FilesUpload";
@@ -6,7 +7,6 @@ import { UploadedFile } from "express-fileupload";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
-import path from "path";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function addAchivement(

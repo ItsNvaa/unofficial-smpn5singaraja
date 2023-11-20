@@ -8,8 +8,8 @@ import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import TUser from "../interfaces/types/UserTypes";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
 import Argon2 from "../../../../services/Argon2";
+import validateEmptyField from "../../../../utils/validateEmptyField";
 
 export default async function updateUser(
   req: Request,
@@ -18,12 +18,8 @@ export default async function updateUser(
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
 
+    validateEmptyField(req, res);
     const userValidation = user({ required: false });
     const { value, error } = userValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);

@@ -10,17 +10,14 @@ import Argon2 from "../../../../services/Argon2";
 import registerUser from "../services/registerUser";
 import path from "path";
 import validateUsernameAndEmail from "../services/validateUsernameAndEmail";
+import validateEmptyField from "../../../../utils/validateEmptyField";
 
 export default async function register(
   req: Request,
   res: Response
 ): Promise<void | Response<Record<any, string>>> {
   try {
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
+    validateEmptyField(req, res);
 
     const authValidation = user({ required: true });
     const { value, error } = authValidation.validate(req.body);

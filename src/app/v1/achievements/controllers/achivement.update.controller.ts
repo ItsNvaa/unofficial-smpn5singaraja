@@ -8,6 +8,7 @@ import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import validator from "validator";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
+import validateEmptyField from "../../../../utils/validateEmptyField";
 
 export default async function updateAchivement(
   req: Request,
@@ -17,11 +18,7 @@ export default async function updateAchivement(
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
 
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
+    validateEmptyField(req, res);
 
     const achivementValidation = achivement({ required: false });
     const { value, error } = achivementValidation.validate(req.body);
