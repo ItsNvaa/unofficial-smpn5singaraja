@@ -21,6 +21,7 @@ import authRoutes from "./app/v1/auth/routes/auth.routes.ts";
 import googleAuthRoutes from "./app/v1/auth/routes/google.auth.routes.ts";
 import githubAuthRoutes from "./app/v1/auth/routes/github.auth.routes.ts";
 import galeriesRoutes from "./app/v1/galeries/routes/galery.routes.ts";
+import teachersRoutes from "./app/v1/teachers/routes/teacher.routes.ts";
 
 app.use("/v1/users", usersRoutes);
 app.use("/v1/achivements", achivementRoutes);
@@ -28,5 +29,6 @@ app.use("/v1/auth", authRoutes);
 app.use("/v1/auth/google", googleAuthRoutes);
 app.use("/v1/auth/github", githubAuthRoutes);
 app.use("/v1/galeries", galeriesRoutes);
+app.use("/v1/teachers", teachersRoutes);
 
 export default app;
