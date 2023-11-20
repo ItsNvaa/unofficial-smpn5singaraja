@@ -1,7 +1,7 @@
 type TGalery = {
   id: string;
   title: string;
-  desciption: string;
+  description: string;
   picture: string;
   createdAt: Date;
   updatedAt: Date;
