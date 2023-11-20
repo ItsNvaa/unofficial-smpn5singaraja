@@ -65,3 +65,27 @@ export async function singeTeacher(
     await client.$disconnect();
   }
 }
+
+export async function searchTeachers(
+  req: Request,
+  res: Response
+): Promise<void | Response<Record<any, string>>> {
+  try {
+    const { q } = req.query;
+
+    const teachers: Awaited<TeacherType[]> = await client.teacher.findMany({
+      where: { fullname: { contains: String(q) } },
+    });
+
+    return new SuccessResponses().sendSuccessWithMultipleData(
+      res,
+      "teachers",
+      teachers
+    );
+  } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
+  }
+}
