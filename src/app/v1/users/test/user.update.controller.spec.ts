@@ -33,6 +33,16 @@ describe("Test Update Users API Endpoint", () => {
     expect(request.body.status).toBe("OK");
     expect(request.statusCode).toBe(200);
   });
+  test("should be return 404 status code if the user does not exist", async () => {
+    const user = await client.user.findFirst();
+    const request = await supertest(app)
+      .patch(`/v1/users/0911712b-615b-471f-a843-1ceea1719276`)
+      .field({ name: "HEHEHE" })
+      .attach("picture", "./public/test/test.avif");
+
+    expect(request.body.status).toBe("KO");
+    expect(request.statusCode).toBe(404);
+  });
   test("should be return 400 status code if the image ext was not supported", async () => {
     const user = await client.user.findFirst();
     const request = await supertest(app)

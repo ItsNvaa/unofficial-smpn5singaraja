@@ -2,37 +2,42 @@ import path from "path";
 import validator from "validator";
 import { Request, Response } from "express";
 import client from "../../../../libs/configs/prisma";
+import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import logger from "../../../../libs/logger";
 import validateEmptyField from "../../../../utils/validateEmptyField";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
-import galery from "../../../../validations/galeryValidation";
-import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
-import TGalery from "../interfaces/types/GaleryTypes";
+import responsesMessege from "../../../../const/readonly/responsesMessege";
+import teacher from "../../../../validations/teacherValidation";
+import TeacherType from "../interfaces/types/TeacherTypes";
 import FilesSystem from "../../../../services/FilesSystem";
 
-export default async function updateGalery(
+export default async function updateTeacher(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response<Record<any, string>>> {
   try {
     const { id } = req.params;
-    if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
+    if (!validator.isUUID(id))
+      return new ErrorsResponses().badRequest(
+        res,
+        responsesMessege.wrongRequestID
+      );
 
     validateEmptyField(req, res);
 
-    const galeryValidation = galery({ required: false });
-    const { value, error } = galeryValidation.validate(req.body);
+    const teacherValidation = teacher({ required: false });
+    const { value, error } = teacherValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
-    const isGaleryExist: TGalery | null = await client.galery.findUnique({
+    const isTeacherExist: TeacherType | null = await client.teacher.findUnique({
       where: { id },
     });
 
-    if (!isGaleryExist) return new ErrorsResponses().notFound(res);
+    if (!isTeacherExist) return new ErrorsResponses().notFound(res);
 
     if (!req.files) {
-      await client.galery.update({
+      await client.teacher.update({
         where: { id },
         data: { ...value },
       });
@@ -43,14 +48,14 @@ export default async function updateGalery(
     if (req.files) {
       filesUploadFieldsValidation(req, res, "picture");
 
-      const pathName = "./public/img/galeries/pictures";
+      const pathName = "./public/img/teachers/pictures";
       // @ts-ignore
       const picture: UploadedFile = req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
-      )}/img/galeries/pictures/${picture.md5 + path.extname(picture.name)}`;
+      )}/img/teachers/pictures/${picture.md5 + path.extname(picture.name)}`;
 
-      const oldImageFileName = isGaleryExist.picture.split("/")[6];
+      const oldImageFileName = isTeacherExist.picture.split("/")[6];
       const oldImagePath: string = `./public/img/galeries/pictures/${oldImageFileName}`;
       new FilesSystem().deleteFile(oldImagePath);
 
@@ -61,7 +66,7 @@ export default async function updateGalery(
         pathName,
       });
 
-      await client.galery.update({
+      await client.teacher.update({
         where: { id },
         data: { ...value, picture: urlPath },
       });
