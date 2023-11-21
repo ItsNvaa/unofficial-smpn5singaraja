@@ -8,6 +8,7 @@ import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsVali
 import galery from "../../../../validations/galeryValidation";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
+import TGalery from "../interfaces/types/GaleryTypes";
 
 export default async function updateGalery(
   req: Request,
@@ -22,6 +23,12 @@ export default async function updateGalery(
     const galeryValidation = galery({ required: false });
     const { value, error } = galeryValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
+
+    const isGaleryExist: TGalery | null = await client.galery.findUnique({
+      where: { id },
+    });
+
+    if (!isGaleryExist) return new ErrorsResponses().notFound(res);
 
     if (!req.files) {
       await client.galery.update({

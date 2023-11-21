@@ -66,6 +66,17 @@ describe("Test Update Galery API Endpoint", () => {
     expect(request.body.status).toBe("OK");
     expect(request.body.updated).toBe(true);
   });
+  test("should be return 404 status code if the galery was not found", async () => {
+    const request = await supertest(app)
+      .patch(`/v1/galeries/0911712b-615b-471f-a843-1ceea1719276`)
+      .field({
+        title: "updated",
+      })
+      .attach("picture", "./public/test/test.avif");
+
+    expect(request.status).toBe(404);
+    expect(request.body.status).toBe("KO");
+  });
   test("Make sure it can accept application/json", async () => {
     const galery = await client.galery.findFirst();
     const request = await supertest(app)
