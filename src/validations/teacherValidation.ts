@@ -5,7 +5,7 @@ export default function teacher({ required }: { required: boolean }) {
   const isRequired = required ? Joi.string().required() : Joi.string();
   const teacherValidation = Joi.object<TeacherType>({
     fullname: isRequired,
-    gender: isRequired.default("Non-binary"),
+    gender: Joi.string().default("Non-binary"),
     NIP: required ? Joi.number().required() : Joi.number(),
     grade: Joi.string(),
     class: Joi.string(),
