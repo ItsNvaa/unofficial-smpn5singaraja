@@ -3289,8 +3289,8 @@ export namespace Prisma {
     fullname: string
     NIP: number
     gender: string
-    grade: string
-    class: string
+    grade: string | null
+    class: string | null
     email: string | null
     profile: string | null
     picture: string
@@ -3348,8 +3348,8 @@ export namespace Prisma {
       fullname: string
       NIP: number
       gender: string
-      grade: string
-      class: string
+      grade: string | null
+      class: string | null
       email: string | null
       profile: string | null
       picture: string
@@ -7005,8 +7005,8 @@ export namespace Prisma {
     fullname?: StringFilter<"Teacher"> | string
     NIP?: IntFilter<"Teacher"> | number
     gender?: StringFilter<"Teacher"> | string
-    grade?: StringFilter<"Teacher"> | string
-    class?: StringFilter<"Teacher"> | string
+    grade?: StringNullableFilter<"Teacher"> | string | null
+    class?: StringNullableFilter<"Teacher"> | string | null
     email?: StringNullableFilter<"Teacher"> | string | null
     profile?: StringNullableFilter<"Teacher"> | string | null
     picture?: StringFilter<"Teacher"> | string
@@ -7017,8 +7017,8 @@ export namespace Prisma {
     fullname?: SortOrder
     NIP?: SortOrder
     gender?: SortOrder
-    grade?: SortOrder
-    class?: SortOrder
+    grade?: SortOrderInput | SortOrder
+    class?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     profile?: SortOrderInput | SortOrder
     picture?: SortOrder
@@ -7032,8 +7032,8 @@ export namespace Prisma {
     fullname?: StringFilter<"Teacher"> | string
     NIP?: IntFilter<"Teacher"> | number
     gender?: StringFilter<"Teacher"> | string
-    grade?: StringFilter<"Teacher"> | string
-    class?: StringFilter<"Teacher"> | string
+    grade?: StringNullableFilter<"Teacher"> | string | null
+    class?: StringNullableFilter<"Teacher"> | string | null
     email?: StringNullableFilter<"Teacher"> | string | null
     profile?: StringNullableFilter<"Teacher"> | string | null
     picture?: StringFilter<"Teacher"> | string
@@ -7044,8 +7044,8 @@ export namespace Prisma {
     fullname?: SortOrder
     NIP?: SortOrder
     gender?: SortOrder
-    grade?: SortOrder
-    class?: SortOrder
+    grade?: SortOrderInput | SortOrder
+    class?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     profile?: SortOrderInput | SortOrder
     picture?: SortOrder
@@ -7064,8 +7064,8 @@ export namespace Prisma {
     fullname?: StringWithAggregatesFilter<"Teacher"> | string
     NIP?: IntWithAggregatesFilter<"Teacher"> | number
     gender?: StringWithAggregatesFilter<"Teacher"> | string
-    grade?: StringWithAggregatesFilter<"Teacher"> | string
-    class?: StringWithAggregatesFilter<"Teacher"> | string
+    grade?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
+    class?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     email?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     profile?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     picture?: StringWithAggregatesFilter<"Teacher"> | string
@@ -7394,8 +7394,8 @@ export namespace Prisma {
     fullname: string
     NIP: number
     gender: string
-    grade: string
-    class: string
+    grade?: string | null
+    class?: string | null
     email?: string | null
     profile?: string | null
     picture: string
@@ -7406,8 +7406,8 @@ export namespace Prisma {
     fullname: string
     NIP: number
     gender: string
-    grade: string
-    class: string
+    grade?: string | null
+    class?: string | null
     email?: string | null
     profile?: string | null
     picture: string
@@ -7418,8 +7418,8 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     NIP?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
-    grade?: StringFieldUpdateOperationsInput | string
-    class?: StringFieldUpdateOperationsInput | string
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     profile?: NullableStringFieldUpdateOperationsInput | string | null
     picture?: StringFieldUpdateOperationsInput | string
@@ -7430,8 +7430,8 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     NIP?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
-    grade?: StringFieldUpdateOperationsInput | string
-    class?: StringFieldUpdateOperationsInput | string
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     profile?: NullableStringFieldUpdateOperationsInput | string | null
     picture?: StringFieldUpdateOperationsInput | string
@@ -7442,8 +7442,8 @@ export namespace Prisma {
     fullname: string
     NIP: number
     gender: string
-    grade: string
-    class: string
+    grade?: string | null
+    class?: string | null
     email?: string | null
     profile?: string | null
     picture: string
@@ -7454,8 +7454,8 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     NIP?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
-    grade?: StringFieldUpdateOperationsInput | string
-    class?: StringFieldUpdateOperationsInput | string
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     profile?: NullableStringFieldUpdateOperationsInput | string | null
     picture?: StringFieldUpdateOperationsInput | string
@@ -7466,8 +7466,8 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     NIP?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
-    grade?: StringFieldUpdateOperationsInput | string
-    class?: StringFieldUpdateOperationsInput | string
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     profile?: NullableStringFieldUpdateOperationsInput | string | null
     picture?: StringFieldUpdateOperationsInput | string
