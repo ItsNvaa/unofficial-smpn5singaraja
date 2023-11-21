@@ -7,8 +7,8 @@ import achivement from "../../../../validations/achivementValidation";
 import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import validator from "validator";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
 import validateEmptyField from "../../../../utils/validateEmptyField";
+import TAchivement from "../interfaces/types/AchivementTypes";
 
 export default async function updateAchivement(
   req: Request,
@@ -23,6 +23,13 @@ export default async function updateAchivement(
     const achivementValidation = achivement({ required: false });
     const { value, error } = achivementValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
+
+    const isAchivementExist: TAchivement | null =
+      await client.achivement.findUnique({
+        where: { id },
+      });
+
+    if (!isAchivementExist) return new ErrorsResponses().notFound(res);
 
     if (!req.files) {
       await client.achivement.update({
