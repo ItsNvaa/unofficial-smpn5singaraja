@@ -10,6 +10,7 @@ import TUser from "../interfaces/types/UserTypes";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 import Argon2 from "../../../../services/Argon2";
 import validateEmptyField from "../../../../utils/validateEmptyField";
+import FilesSystem from "../../../../services/FilesSystem";
 
 export default async function updateUser(
   req: Request,
@@ -54,6 +55,10 @@ export default async function updateUser(
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
+
+      const oldImageFileName = isUserExits.picture.split("/")[6];
+      const oldImagePath: string = `./public/img/users/pictures/${oldImageFileName}`;
+      new FilesSystem().deleteFile(oldImagePath);
 
       new FilesUpload().save<TUser>({
         request: req,
