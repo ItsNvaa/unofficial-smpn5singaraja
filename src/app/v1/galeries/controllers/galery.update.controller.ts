@@ -9,6 +9,7 @@ import galery from "../../../../validations/galeryValidation";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
 import TGalery from "../interfaces/types/GaleryTypes";
+import FilesSystem from "../../../../services/FilesSystem";
 
 export default async function updateGalery(
   req: Request,
@@ -48,6 +49,10 @@ export default async function updateGalery(
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/galeries/pictures/${picture.md5 + path.extname(picture.name)}`;
+
+      const oldImageFileName = isGaleryExist.picture.split("/")[6];
+      const oldImagePath: string = `./public/img/galeries/pictures/${oldImageFileName}`;
+      new FilesSystem().deleteFile(oldImagePath);
 
       new FilesUpload().save({
         request: req,
