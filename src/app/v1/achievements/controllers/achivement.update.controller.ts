@@ -9,6 +9,7 @@ import path from "path";
 import validator from "validator";
 import validateEmptyField from "../../../../utils/validateEmptyField";
 import TAchivement from "../interfaces/types/AchivementTypes";
+import FilesSystem from "../../../../services/FilesSystem";
 
 export default async function updateAchivement(
   req: Request,
@@ -49,6 +50,10 @@ export default async function updateAchivement(
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/achivements/pictures/${picture.md5 + path.extname(picture.name)}`;
+
+      const oldImageFileName = isAchivementExist.picture.split("/")[6];
+      const oldImagePath: string = `./public/img/achivements/pictures/${oldImageFileName}`;
+      new FilesSystem().deleteFile(oldImagePath);
 
       new FilesUpload().save({
         request: req,
