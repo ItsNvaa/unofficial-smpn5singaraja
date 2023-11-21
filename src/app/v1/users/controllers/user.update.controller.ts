@@ -24,6 +24,12 @@ export default async function updateUser(
     const { value, error } = userValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
 
+    const isUserExits: TUser | null = await client.user.findUnique({
+      where: { id },
+    });
+
+    if (!isUserExits) return new ErrorsResponses().notFound(res);
+
     let password: string | null;
     password = new Argon2().hash(value.password);
     if (!password || !value.password) password = value.password;
