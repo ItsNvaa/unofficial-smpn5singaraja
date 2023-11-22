@@ -50,6 +50,7 @@ model News {
   title String
   author String
   description String
+  body String
   picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -60,6 +61,7 @@ model Article {
   title String
   author String
   description String
+  body String
   picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
