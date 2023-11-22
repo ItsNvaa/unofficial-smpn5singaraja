@@ -31,3 +31,27 @@ export async function articles(
     await client.$disconnect();
   }
 }
+
+export async function searchArticles(
+  req: Request,
+  res: Response
+): Promise<void | Response<any, Record<string, any>>> {
+  try {
+    const { q } = req.query;
+
+    const articles: Awaited<TArticle[]> = await client.article.findMany({
+      where: { title: { contains: String(q) } },
+    });
+
+    return new SuccessResponses().sendSuccessWithMultipleData(
+      res,
+      "articles",
+      articles
+    );
+  } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
+  } finally {
+    await client.$disconnect();
+  }
+}
