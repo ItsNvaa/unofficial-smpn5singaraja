@@ -8,6 +8,7 @@ export default function article({ required = true }: { required: boolean }) {
     title: isRequired,
     description: isRequired,
     author: isRequired,
+    body: isRequired,
     picture: Joi.string(),
     createdAt: Joi.string(),
     updatedAt: Joi.string(),
