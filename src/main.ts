@@ -23,6 +23,7 @@ import githubAuthRoutes from "./app/v1/auth/routes/github.auth.routes.ts";
 import galeriesRoutes from "./app/v1/galeries/routes/galery.routes.ts";
 import teachersRoutes from "./app/v1/teachers/routes/teacher.routes.ts";
 import newsRoutes from "./app/v1/news/routes/news.routes.ts";
+import articlesRoutes from "./app/v1/articles/routes/article.routes.ts";
 
 app.use("/v1/users", usersRoutes);
 app.use("/v1/achivements", achivementRoutes);
@@ -32,5 +33,6 @@ app.use("/v1/auth/github", githubAuthRoutes);
 app.use("/v1/galeries", galeriesRoutes);
 app.use("/v1/teachers", teachersRoutes);
 app.use("/v1/news", newsRoutes);
+app.use("/v1/articles", articlesRoutes);
 
 export default app;
