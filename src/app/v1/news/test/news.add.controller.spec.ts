@@ -28,7 +28,12 @@ describe("Test Add News API Endpoint", () => {
   test("should be return 422 status code if the request file name field is not allowed", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" })
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      })
       .attach("pictures", "./public/test/test.avif");
 
     expect(request.status).toBe(422);
@@ -37,7 +42,12 @@ describe("Test Add News API Endpoint", () => {
   test("should be return 422 status code if the request file image size is more than 5mb", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" })
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      })
       .attach("picture", "./public/test/5mb.png");
 
     expect(request.status).toBe(422);
@@ -46,7 +56,12 @@ describe("Test Add News API Endpoint", () => {
   test("should be return 400 status code if the request file image extension is not supported", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" })
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      })
       .attach("picture", "./public/test/test.ico");
 
     expect(request.status).toBe(400);
@@ -55,7 +70,12 @@ describe("Test Add News API Endpoint", () => {
   test("should be return 400 status code if the request file is empty", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" });
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      });
 
     expect(request.status).toBe(400);
     expect(request.body.status).toBe("KO");
@@ -63,7 +83,12 @@ describe("Test Add News API Endpoint", () => {
   test("should be return 201 status code", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" })
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      })
       .attach("picture", "./public/test/test.avif");
 
     expect(request.status).toBe(201);
@@ -72,7 +97,12 @@ describe("Test Add News API Endpoint", () => {
   test("Make sure it can accept aplication/json", async () => {
     const request = await supertest(app)
       .post("/v1/news")
-      .field({ title: "test", description: "test", author: "test" })
+      .field({
+        title: "test",
+        description: "test",
+        author: "test",
+        body: "hehe",
+      })
       .attach("picture", "./public/test/test.avif")
       .set("Content-Type", "application/json");
 
