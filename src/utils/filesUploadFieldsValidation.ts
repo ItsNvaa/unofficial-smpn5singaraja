@@ -7,9 +7,9 @@ export default function filesUploadFieldsValidation(
   res: Response,
   field: string
 ): void | Response {
-  if (!validator.contains(field, Object.keys(req.files)))
+  if (!validator.contains(field, Object.keys(req.files!)))
     return new ErrorsResponses().unprocessable(
       res,
-      `The ${Object.keys(req.files)[0]} was not allowed`
+      `The ${Object.keys(req.files!)[0]} was not allowed`
     );
 }
