@@ -10,6 +10,7 @@ import validator from "validator";
 import validateEmptyField from "../../../../utils/validateEmptyField";
 import TAchivement from "../interfaces/types/AchivementTypes";
 import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateAchivement(
   req: Request,
