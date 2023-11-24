@@ -34,8 +34,11 @@ export default async function addGalery(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/galeries/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/galeries/pictures/${picture.md5 + path.extname(picture.name)}`;
