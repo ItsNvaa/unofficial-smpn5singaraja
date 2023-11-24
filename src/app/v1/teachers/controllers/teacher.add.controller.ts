@@ -36,8 +36,11 @@ export default async function addTeacher(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/teachers/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/teachers/pictures/${picture.md5 + path.extname(picture.name)}`;
