@@ -3,7 +3,7 @@ import rateLimit from "express-rate-limit";
 
 const rateLimitter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1min
-  max: 2,
+  max: 60,
   message: {
     TypeError: "Rate Limit Exceeded Error",
     messege:
