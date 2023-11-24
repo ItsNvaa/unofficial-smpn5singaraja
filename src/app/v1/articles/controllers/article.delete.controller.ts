@@ -10,7 +10,7 @@ import FilesSystem from "../../../../services/FilesSystem";
 export default async function deleteArticle(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))

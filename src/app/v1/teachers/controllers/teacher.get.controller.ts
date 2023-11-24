@@ -9,7 +9,7 @@ import TeacherType from "../interfaces/types/TeacherTypes";
 export async function teachers(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { limit, skip } = req.query;
     const total = await client.teacher.count();
@@ -37,7 +37,7 @@ export async function teachers(
 export async function singeTeacher(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))
@@ -69,7 +69,7 @@ export async function singeTeacher(
 export async function searchTeachers(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { q } = req.query;
 

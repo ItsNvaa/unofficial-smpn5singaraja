@@ -11,7 +11,7 @@ import deleteGaleryViaId from "../services/deleteGalery";
 export default async function deleteGalery(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);

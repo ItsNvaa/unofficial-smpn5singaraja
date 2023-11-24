@@ -9,7 +9,7 @@ import responsesMessege from "../../../../const/readonly/responsesMessege";
 export async function achivements(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { skip, limit } = req.query;
     const totalUser = await client.achivement.count();
@@ -38,7 +38,7 @@ export async function achivements(
 export async function singleAchivement(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))

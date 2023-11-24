@@ -7,7 +7,7 @@ import type TArticle from "../../../../interfaces/types/ArticlesTypes";
 export async function news(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { skip, limit } = req.query;
     const totalNews: number = await client.news.count();
@@ -35,7 +35,7 @@ export async function news(
 export async function searchNews(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { q } = req.query;
 

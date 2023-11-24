@@ -12,7 +12,7 @@ import { UploadedFile } from "express-fileupload";
 export default async function addTeacher(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
@@ -36,8 +36,11 @@ export default async function addTeacher(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/teachers/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/teachers/pictures/${picture.md5 + path.extname(picture.name)}`;

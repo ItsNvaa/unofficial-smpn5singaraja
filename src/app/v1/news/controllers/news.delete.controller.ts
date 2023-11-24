@@ -10,7 +10,7 @@ import TArticle from "../../../../interfaces/types/ArticlesTypes";
 export default async function deleteNews(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))

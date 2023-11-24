@@ -11,11 +11,12 @@ import validateEmptyField from "../../../../utils/validateEmptyField";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 import FilesSystem from "../../../../services/FilesSystem";
 import FilesUpload from "../../../../services/FilesUpload";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateArticle(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))
@@ -49,8 +50,11 @@ export default async function updateArticle(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/articles/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/articles/pictures/${picture.md5 + path.extname(picture.name)}`;
