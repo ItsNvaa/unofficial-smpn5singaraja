@@ -5,12 +5,12 @@ import user from "../../../../validations/userValidation";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
 import client from "../../../../libs/configs/prisma";
 import FilesUpload from "../../../../services/FilesUpload";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
 import Argon2 from "../../../../services/Argon2";
 import registerUser from "../services/registerUser";
 import path from "path";
 import validateUsernameAndEmail from "../services/validateUsernameAndEmail";
 import validateEmptyField from "../../../../utils/validateEmptyField";
+import { UploadedFile } from "express-fileupload";
 
 export default async function register(
   req: Request,
@@ -34,8 +34,11 @@ export default async function register(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/users/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/users/pictures/${picture?.md5 + path.extname(picture?.name)}`;
