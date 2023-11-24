@@ -12,7 +12,7 @@ import { UploadedFile } from "express-fileupload";
 export default async function addTeacher(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
