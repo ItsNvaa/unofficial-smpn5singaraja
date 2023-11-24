@@ -65,11 +65,12 @@ export async function loginWithGithub(
       });
     }
 
-    // @ts-ignore
+    // @ts-expect-error Return type does not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
       payload: {
         name: userData.name,
         email: userData.email || value.email || "",
+        id: value.id || "",
       },
     });
 

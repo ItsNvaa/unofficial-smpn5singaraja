@@ -36,7 +36,7 @@ export default async function login(
         "The password isn't correct!"
       );
 
-    // @ts-ignore
+    // @ts-expect-error Return type did not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
       payload: { name: value.name, id: value.id, email: value.id },
     });

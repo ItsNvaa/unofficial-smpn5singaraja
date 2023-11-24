@@ -46,9 +46,9 @@ export async function loginWithGoogle(
       });
     }
 
-    // @ts-ignore
+    // @ts-expect-error Return type did not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
-      payload: { name: data.name!, email: data.id! },
+      payload: { name: data.name!, email: data.email!, id: data.id! },
     });
 
     const isSecured = process.env.NODE_ENV == "production" ? true : false;
