@@ -6,7 +6,7 @@
 
 :root {
   --accent: #6f2dbd;
-  --primary: #030712;
+  --primary: #02040a;
   --secondary: #e5cce8;
 }
 
@@ -21,7 +21,7 @@
   scroll-behavior: smooth;
   list-style: none;
   scroll-padding-top: 6rem;
-  background-color: #030712;
+  background-color: #02040a;
 }
 
 html {
