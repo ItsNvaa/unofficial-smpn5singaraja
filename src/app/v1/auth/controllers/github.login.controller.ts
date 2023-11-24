@@ -17,7 +17,7 @@ import type TGithubUser from "../interfaces/types/GithubUserTypes";
 export async function loginWithGithub(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const authValidation = user({ required: false });
     const { value, error } = authValidation.validate(req.body);
@@ -65,11 +65,12 @@ export async function loginWithGithub(
       });
     }
 
-    // @ts-ignore
+    // @ts-expect-error Return type does not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
       payload: {
         name: userData.name,
         email: userData.email || value.email || "",
+        id: value.id || "",
       },
     });
 

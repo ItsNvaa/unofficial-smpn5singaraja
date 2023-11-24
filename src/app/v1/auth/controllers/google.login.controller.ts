@@ -12,7 +12,7 @@ import { CLIENT_FRONTEND_URL } from "../../../../const/config";
 export async function loginWithGoogle(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const authValidation = user({ required: false });
     const { value, error } = authValidation.validate(req.body);
@@ -46,9 +46,9 @@ export async function loginWithGoogle(
       });
     }
 
-    // @ts-ignore
+    // @ts-expect-error Return type did not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
-      payload: { name: data.name!, email: data.id! },
+      payload: { name: data.name!, email: data.email!, id: data.id! },
     });
 
     const isSecured = process.env.NODE_ENV == "production" ? true : false;

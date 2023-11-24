@@ -13,7 +13,7 @@ import validateEmptyField from "../../../../utils/validateEmptyField";
 export default async function login(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     validateEmptyField(req, res);
 
@@ -36,7 +36,7 @@ export default async function login(
         "The password isn't correct!"
       );
 
-    // @ts-ignore
+    // @ts-expect-error Return type did not match
     const { accessToken, refreshToken } = new JsonWebToken().sign({
       payload: { name: value.name, id: value.id, email: value.id },
     });

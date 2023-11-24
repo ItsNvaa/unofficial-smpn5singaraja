@@ -6,7 +6,7 @@ import client from "../../../../libs/configs/prisma";
 export default async function logout(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const refreshToken = req.cookies.refreshToken;
 
