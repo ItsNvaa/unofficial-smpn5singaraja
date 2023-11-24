@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent: #6f2dbd;
+  --primary: #030712;
+  --secondary: #e5cce8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +21,7 @@
   scroll-behavior: smooth;
   list-style: none;
   scroll-padding-top: 6rem;
-  background-color: #000;
+  background-color: #030712;
 }
 
 html {
