@@ -27,7 +27,8 @@ model User {
 model Galery {
   id String @id @default(uuid())
   title String
-  desciption String
+  description String
+  picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -37,8 +38,8 @@ model Teacher {
   fullname String
   NIP Int
   gender String
-  grade String
-  class String
+  grade String?
+  class String?
   email String?
   profile String?
   picture String
@@ -49,6 +50,7 @@ model News {
   title String
   author String
   description String
+  body String
   picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,6 +61,7 @@ model Article {
   title String
   author String
   description String
+  body String
   picture String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

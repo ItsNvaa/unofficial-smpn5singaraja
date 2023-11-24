@@ -1,3 +1,4 @@
+import path from "path";
 import achivement from "../../../../validations/achivementValidation";
 import { Response, Request } from "express";
 import FilesUpload from "../../../../services/FilesUpload";
@@ -6,13 +7,12 @@ import { UploadedFile } from "express-fileupload";
 import logger from "../../../../libs/logger";
 import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
-import path from "path";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
 
 export default async function addAchivement(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
@@ -36,8 +36,11 @@ export default async function addAchivement(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/achivements/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/achivements/pictures/${picture.md5 + path.extname(picture.name)}`;

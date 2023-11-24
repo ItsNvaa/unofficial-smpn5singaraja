@@ -7,25 +7,31 @@ import achivement from "../../../../validations/achivementValidation";
 import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import validator from "validator";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
+import validateEmptyField from "../../../../utils/validateEmptyField";
+import TAchivement from "../interfaces/types/AchivementTypes";
+import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateAchivement(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
 
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
+    validateEmptyField(req, res);
 
     const achivementValidation = achivement({ required: false });
     const { value, error } = achivementValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
+
+    const isAchivementExist: TAchivement | null =
+      await client.achivement.findUnique({
+        where: { id },
+      });
+
+    if (!isAchivementExist) return new ErrorsResponses().notFound(res);
 
     if (!req.files) {
       await client.achivement.update({
@@ -40,11 +46,18 @@ export default async function updateAchivement(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/achivements/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/achivements/pictures/${picture.md5 + path.extname(picture.name)}`;
+
+      const oldImageFileName = isAchivementExist.picture.split("/")[6];
+      const oldImagePath: string = `./public/img/achivements/pictures/${oldImageFileName}`;
+      new FilesSystem().deleteFile(oldImagePath);
 
       new FilesUpload().save({
         request: req,

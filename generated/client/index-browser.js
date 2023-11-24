@@ -122,7 +122,8 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.GaleryScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  desciption: 'desciption',
+  description: 'description',
+  picture: 'picture',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -144,6 +145,7 @@ exports.Prisma.NewsScalarFieldEnum = {
   title: 'title',
   author: 'author',
   description: 'description',
+  body: 'body',
   picture: 'picture',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -154,6 +156,7 @@ exports.Prisma.ArticleScalarFieldEnum = {
   title: 'title',
   author: 'author',
   description: 'description',
+  body: 'body',
   picture: 'picture',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

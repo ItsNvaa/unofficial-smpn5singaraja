@@ -22,7 +22,7 @@ describe("Test Delete Achivement API Endpoint", () => {
   });
   test("should be return 400 status code if the achivement not exits", async () => {
     const request = await supertest(app).delete(
-      `/v1/users/0911712b-615b-471f-a843-1ceea1719276`
+      `/v1/achivements/0911712b-615b-471f-a843-1ceea1719276`
     );
 
     expect(request.statusCode).toBe(400);

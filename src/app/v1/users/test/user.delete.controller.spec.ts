@@ -11,7 +11,7 @@ describe("Test Delete User Endpoint", () => {
     expect(request.body.status).toBe("OK");
     expect(request.statusCode).toBe(200);
   });
-  test.skip("should be return 400 status code if the user not exits", async () => {
+  test("should be return 400 status code if the user not exits", async () => {
     const request = await supertest(app).delete(
       `/v1/users/0911712b-615b-471f-a843-1ceea1719276`
     );
@@ -19,7 +19,7 @@ describe("Test Delete User Endpoint", () => {
     expect(request.statusCode).toBe(400);
     expect(request.body.status).toBe("KO");
   });
-  test.skip("should be return 400 status code if the user request id is not UUID", async () => {
+  test("should be return 400 status code if the user request id is not UUID", async () => {
     const request = await supertest(app).delete(
       `/v1/users/0911712b-615b-471f-a843-1ceea171927`
     );

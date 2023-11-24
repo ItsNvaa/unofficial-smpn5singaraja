@@ -11,7 +11,7 @@ import responsesMessege from "../../../../const/readonly/responsesMessege";
 export default async function deleteUser(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<Response | void> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))

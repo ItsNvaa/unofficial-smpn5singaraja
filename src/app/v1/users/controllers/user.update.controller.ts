@@ -8,7 +8,10 @@ import FilesUpload from "../../../../services/FilesUpload";
 import path from "path";
 import TUser from "../interfaces/types/UserTypes";
 import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsValidation";
-import responsesMessege from "../../../../const/readonly/responsesMessege";
+import Argon2 from "../../../../services/Argon2";
+import validateEmptyField from "../../../../utils/validateEmptyField";
+import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateUser(
   req: Request,
@@ -17,21 +20,28 @@ export default async function updateUser(
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
-    if (!Object.keys(req.body).length)
-      return new ErrorsResponses().badRequest(
-        res,
-        responsesMessege.emptyFields
-      );
 
+    validateEmptyField(req, res);
     const userValidation = user({ required: false });
     const { value, error } = userValidation.validate(req.body);
     if (error) return new ErrorsResponses().badRequest(res, error.message);
+
+    const isUserExits: TUser | null = await client.user.findUnique({
+      where: { id },
+    });
+
+    if (!isUserExits) return new ErrorsResponses().notFound(res);
+
+    let password: string | null;
+    password = new Argon2().hash(value.password);
+    if (!password || !value.password) password = value.password;
 
     if (!req.files) {
       await client.user.update({
         where: { id },
         data: {
           ...value,
+          password,
         },
       });
 
@@ -41,13 +51,20 @@ export default async function updateUser(
     if (req.files) {
       filesUploadFieldsValidation(req, res, "picture");
       const pathName = "./public/img/users/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
 
-      new FilesUpload().save<TUser>({
+      const oldImageFileName = isUserExits.picture.split("/")[6];
+      const oldImagePath: string = `./public/img/users/pictures/${oldImageFileName}`;
+      new FilesSystem().deleteFile(oldImagePath);
+
+      new FilesUpload().save({
         request: req,
         response: res,
         pathName,
@@ -56,7 +73,7 @@ export default async function updateUser(
 
       await client.user.update({
         where: { id },
-        data: { ...value, picture: urlPath },
+        data: { ...value, picture: urlPath, password },
       });
 
       return new SuccessResponses().success(res, "updated");

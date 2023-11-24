@@ -38,6 +38,16 @@ describe("Test Update Achivement API Endpoint", () => {
     expect(request.body.status).toBe("OK");
     expect(request.statusCode).toBe(200);
   });
+  test("should be return 404 status code if the achivement data was not found", async () => {
+    const request = await supertest(app)
+      .patch(`/v1/achivements/0911712b-615b-471f-a843-1ceea1719276`)
+      .set("Content-Type", "application/json")
+      .field({ title: "Hehehe" })
+      .attach("picture", "./public/test/test.avif");
+
+    expect(request.body.status).toBe("KO");
+    expect(request.statusCode).toBe(404);
+  });
   test("should be return 422 status code if the request files field name is not allowed", async () => {
     const achivement = await client.achivement.findFirst();
 
