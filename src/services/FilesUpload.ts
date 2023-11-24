@@ -6,7 +6,7 @@ import { ErrorsResponses } from "../utils/res";
 import imgExt from "../const/readonly/imageExtension";
 
 class FilesUpload {
-  save<T>({
+  save({
     request,
     response,
     pathName,
@@ -17,7 +17,6 @@ class FilesUpload {
     pathName: string;
     file: UploadedFile;
   }) {
-    // @ts-ignore
     const ext: string = path.extname(file.name);
 
     if (file.data.length > 5 * 1024 * 1024)
