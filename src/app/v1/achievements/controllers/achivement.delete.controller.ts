@@ -6,6 +6,7 @@ import TAchivement from "../interfaces/types/AchivementTypes";
 import responsesMessege from "../../../../const/readonly/responsesMessege";
 import FilesSystem from "../../../../services/FilesSystem";
 import deleteAchivementViaId from "../services/deleteAchivement";
+import logger from "../../../../libs/logger";
 
 export default async function deleteAchivement(
   req: Request,
@@ -47,6 +48,8 @@ export default async function deleteAchivement(
       return new SuccessResponses().success(res, "deleted");
     }
   } catch (err) {
+    logger.error(err);
+    return new ErrorsResponses().badRequest(res);
   } finally {
     await client.$disconnect();
   }
