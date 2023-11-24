@@ -11,6 +11,7 @@ import filesUploadFieldsValidation from "../../../../utils/filesUploadFieldsVali
 import Argon2 from "../../../../services/Argon2";
 import validateEmptyField from "../../../../utils/validateEmptyField";
 import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateUser(
   req: Request,
@@ -50,8 +51,11 @@ export default async function updateUser(
     if (req.files) {
       filesUploadFieldsValidation(req, res, "picture");
       const pathName = "./public/img/users/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/users/pictures/${picture.md5 + path.extname(picture.name)}`;
@@ -60,7 +64,7 @@ export default async function updateUser(
       const oldImagePath: string = `./public/img/users/pictures/${oldImageFileName}`;
       new FilesSystem().deleteFile(oldImagePath);
 
-      new FilesUpload().save<TUser>({
+      new FilesUpload().save({
         request: req,
         response: res,
         pathName,
