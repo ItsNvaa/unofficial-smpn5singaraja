@@ -1,6 +1,6 @@
 <p align="center">
   <a href="/"> 
-    <img src="https://i.ibb.co/680MxZh/Tak-berjudul256.png" height=120>
+    <img src="https://i.ibb.co/YP3HjBN/Tak-berjudul256.png" height=120>
     <h1 align="center">Unofficial SMPN5 SINGARAJA</h1>
   </a>
 </p>
