@@ -6,7 +6,7 @@ import TUser from "../../users/interfaces/types/UserTypes";
 export default async function validateUsernameAndEmail(
   res: Response,
   input: TUser
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   const users = await client.user.findMany({
     select: { name: true, email: true },
   });

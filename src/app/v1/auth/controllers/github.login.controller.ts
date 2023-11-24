@@ -17,7 +17,7 @@ import type TGithubUser from "../interfaces/types/GithubUserTypes";
 export async function loginWithGithub(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const authValidation = user({ required: false });
     const { value, error } = authValidation.validate(req.body);

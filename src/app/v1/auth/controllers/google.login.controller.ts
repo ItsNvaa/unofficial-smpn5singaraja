@@ -12,7 +12,7 @@ import { CLIENT_FRONTEND_URL } from "../../../../const/config";
 export async function loginWithGoogle(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const authValidation = user({ required: false });
     const { value, error } = authValidation.validate(req.body);

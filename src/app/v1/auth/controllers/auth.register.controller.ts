@@ -15,7 +15,7 @@ import validateEmptyField from "../../../../utils/validateEmptyField";
 export default async function register(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     validateEmptyField(req, res);
 
