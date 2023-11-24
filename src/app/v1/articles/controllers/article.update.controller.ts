@@ -15,7 +15,7 @@ import FilesUpload from "../../../../services/FilesUpload";
 export default async function updateArticle(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))

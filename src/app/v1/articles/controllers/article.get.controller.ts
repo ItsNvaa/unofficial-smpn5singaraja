@@ -7,7 +7,7 @@ import { SuccessResponses, ErrorsResponses } from "../../../../utils/res";
 export async function articles(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { skip, limit } = req.query;
     const total: number = await client.article.count();
