@@ -35,7 +35,7 @@ export async function articles(
 export async function searchArticles(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { q } = req.query;
 
