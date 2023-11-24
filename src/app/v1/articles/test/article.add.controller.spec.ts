@@ -1,7 +1,6 @@
 import { describe, test, expect } from "bun:test";
 import app from "../../../../main";
 import supertest from "supertest";
-import client from "../../../../libs/configs/prisma";
 
 describe("Test Add Article API Endpoint", () => {
   test("should be return 400 status code if the request body field is empty", async () => {
