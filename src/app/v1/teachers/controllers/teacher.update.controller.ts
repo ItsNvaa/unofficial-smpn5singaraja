@@ -11,11 +11,12 @@ import responsesMessege from "../../../../const/readonly/responsesMessege";
 import teacher from "../../../../validations/teacherValidation";
 import TeacherType from "../interfaces/types/TeacherTypes";
 import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateTeacher(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))
@@ -49,8 +50,11 @@ export default async function updateTeacher(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/teachers/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/teachers/pictures/${picture.md5 + path.extname(picture.name)}`;
