@@ -9,7 +9,7 @@ import responsesMessege from "../../../../const/readonly/responsesMessege";
 export async function galeries(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { skip, limit } = req.query;
     const totalGalery = await client.galery.count();
@@ -37,7 +37,7 @@ export async function galeries(
 export async function singleGalery(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id))
@@ -64,7 +64,7 @@ export async function singleGalery(
 export async function searchGaleries(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { q } = req.query;
 

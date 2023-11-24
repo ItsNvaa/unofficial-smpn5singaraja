@@ -10,11 +10,12 @@ import { ErrorsResponses, SuccessResponses } from "../../../../utils/res";
 import FilesUpload from "../../../../services/FilesUpload";
 import TGalery from "../interfaces/types/GaleryTypes";
 import FilesSystem from "../../../../services/FilesSystem";
+import { UploadedFile } from "express-fileupload";
 
 export default async function updateGalery(
   req: Request,
   res: Response
-): Promise<void | Response<any, Record<string, any>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
@@ -44,8 +45,11 @@ export default async function updateGalery(
       filesUploadFieldsValidation(req, res, "picture");
 
       const pathName = "./public/img/galeries/pictures";
-      // @ts-ignore
-      const picture: UploadedFile = req.files.picture;
+      const picture: UploadedFile | UploadedFile[] = Array.isArray(
+        req.files.picture
+      )
+        ? req.files.picture[0]
+        : req.files.picture;
       const urlPath: string = `${req.protocol}://${req.get(
         "host"
       )}/img/galeries/pictures/${picture.md5 + path.extname(picture.name)}`;
