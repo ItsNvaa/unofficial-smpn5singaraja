@@ -12,7 +12,7 @@ import responsesMessege from "../../../../const/readonly/responsesMessege";
 export default async function addGalery(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     if (!Object.keys(req.body).length)
       return new ErrorsResponses().badRequest(
