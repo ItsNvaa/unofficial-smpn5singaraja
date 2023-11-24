@@ -10,7 +10,7 @@ import deleteAchivementViaId from "../services/deleteAchivement";
 export default async function deleteAchivement(
   req: Request,
   res: Response
-): Promise<void | Response<Record<any, string>>> {
+): Promise<void | Response> {
   try {
     const { id } = req.params;
     if (!validator.isUUID(id)) return new ErrorsResponses().badRequest(res);
