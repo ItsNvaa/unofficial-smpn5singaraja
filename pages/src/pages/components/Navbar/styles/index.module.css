@@ -1,0 +1,79 @@
+.container {
+  width: 100%;
+  position: fixed;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.212);
+  z-index: 999;
+}
+.headerContent .logo {
+  position: relative;
+}
+.wrapperContent {
+  position: relative;
+  padding: 0.45rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.contentWrapper,
+.ctaWrapper {
+  display: none;
+}
+.menuWrapper {
+  opacity: 0.7;
+}
+.closeBtn {
+  opacity: 0.7;
+}
+.hidden {
+  display: none;
+}
+
+/* Media Queries */
+@media (width >= 750px) {
+  .headerContent {
+    display: flex;
+    gap: 1.6rem;
+  }
+  .wrapperContent {
+    position: relative;
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .contentWrapper {
+    align-items: center;
+    gap: 0.9rem;
+    display: flex;
+  }
+  .content {
+    border-left: 2px solid rgba(255, 255, 255, 0.365);
+    display: flex;
+    gap: 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0 0 0 1.2rem;
+  }
+  .closeBtn {
+    display: none;
+  }
+  .ctaWrapper {
+    display: flex;
+    gap: 1rem;
+  }
+  .menuWrapper {
+    display: none;
+  }
+  .link {
+    opacity: 0.8;
+  }
+  .link:hover {
+    opacity: 1;
+  }
+}
+@media (width >= 1020px) {
+  .logo {
+    width: 41.5px;
+    height: 41.5px;
+  }
+}
