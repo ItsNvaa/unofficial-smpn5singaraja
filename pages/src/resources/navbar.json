@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Profil",
+    "url": "/profile"
+  },
+  {
+    "title": "Artikel",
+    "url": "/articles"
+  },
+  {
+    "title": "Berita",
+    "url": "/news"
+  },
+  {
+    "title": "Galeri",
+    "url": "/galeries"
+  },
+  {
+    "title": "Guru",
+    "url": "/teachers"
+  },
+  {
+    "title": "Prestasi",
+    "url": "/achivements"
+  }
+]
