@@ -14,6 +14,9 @@ export const Container = styled.div`
   @media (width >= 1400px) {
     padding: 0 10rem;
   }
+  @media (width >= 1550px) {
+    padding: 0 13rem;
+  }
 `;
 
 export const Primary = styled.a`
