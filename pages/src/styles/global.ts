@@ -17,14 +17,14 @@ export const Container = styled.div`
 `;
 
 export const Primary = styled.a`
-  font-size: 0.85rem;
-  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
+  padding: 0.35rem 1.05rem;
   background-color: var(--accent);
   border-radius: 5px;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.36);
   &:hover {
-    opacity: 0.85;
+    opacity: 0.9;
   }
   @media (width >= 920px) {
     padding: 0.3rem 1rem 0.4rem 1rem;
@@ -33,15 +33,15 @@ export const Primary = styled.a`
 `;
 
 export const Secondary = styled.a`
-  font-size: 0.85rem;
-  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
+  padding: 0.35rem 1.05rem;
   background-color: var(--primary);
   color: var(--secondary);
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.36);
   font-weight: 600;
   &:hover {
-    opacity: 0.85;
+    opacity: 0.9;
   }
   @media (width >= 920px) {
     padding: 0.3rem 1rem 0.4rem 1rem;
