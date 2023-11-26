@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 0 1.8rem;
+  @media (width >= 520px) {
+    padding: 0 2.5rem;
+  }
   @media (width >= 750px) {
-    padding: 0 4rem;
+    padding: 0 3.5rem;
   }
   @media (width >= 920px) {
     padding: 0 6rem;
