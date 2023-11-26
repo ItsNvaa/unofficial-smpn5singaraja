@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+require("dotenv").config();
+const webpack = require("webpack");
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -9,6 +11,10 @@ const nextConfig = {
         pathname: "/images/berita/**",
       },
     ],
+  },
+  webpack: (config) => {
+    config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+    return config;
   },
 };
 
